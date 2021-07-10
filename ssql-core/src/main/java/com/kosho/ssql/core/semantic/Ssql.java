@@ -1,11 +1,17 @@
 package com.kosho.ssql.core.semantic;
 
+import com.kosho.ssql.core.exception.SsqlErrorListener;
+import com.kosho.ssql.core.parser.SsqlLexer;
+import com.kosho.ssql.core.parser.SsqlParser;
 import com.kosho.ssql.core.semantic.from.From;
 import com.kosho.ssql.core.semantic.group.GroupBy;
 import com.kosho.ssql.core.semantic.limit.Limit;
 import com.kosho.ssql.core.semantic.order.OrderBy;
 import com.kosho.ssql.core.semantic.select.Select;
 import com.kosho.ssql.core.semantic.where.Where;
+import com.kosho.ssql.core.visitor.SsqlAstVisitor;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 /**
  * Ssql表达式
@@ -95,5 +101,19 @@ public class Ssql {
         }
 
         return ssqlStr;
+    }
+
+    /**
+     * 编译为Ssql表达式
+     *
+     * @param ssqlStr 字符串
+     * @return Ssql表达式
+     */
+    public static Ssql compile(String ssqlStr) {
+        SsqlLexer lexer = new SsqlLexer(CharStreams.fromString(ssqlStr));
+        SsqlParser parser = new SsqlParser(new CommonTokenStream(lexer));
+        parser.addErrorListener(SsqlErrorListener.INSTANCE);
+        SsqlParser.SsqlContext context = parser.ssql();
+        return (Ssql) SsqlAstVisitor.INSTANCE.visit(context);
     }
 }
