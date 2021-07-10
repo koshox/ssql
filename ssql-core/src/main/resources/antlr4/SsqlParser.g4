@@ -6,28 +6,28 @@ options {
     tokenVocab=SsqlLexer;
 }
 
-ssql: selectStatment EOF;
+ssql: selectStatement EOF;
 
-selectStatment: simpleSelectStatment | bracketedSelectStatment;
+selectStatement: simpleSelectStatement | bracketedSelectStatement;
 
-bracketedSelectStatment: LBKT simpleSelectStatment RBKT | LBKT bracketedSelectStatment RBKT ;
+simpleSelectStatement: selectClause fromClause whereClause? groupByClause? orderByClause? limitClause?;
 
-simpleSelectStatment: selectClause fromClause whereClause? groupByClause? orderByClause? limitClause?;
+bracketedSelectStatement: LBKT simpleSelectStatement RBKT | LBKT bracketedSelectStatement RBKT;
 
 selectClause: SELECT DISTINCT? selectColumns;
 
 selectColumns
     : STAR                               #selectAll
-    | selectColumn (COMMA selectColumn)* #selectSepcialColumns
+    | selectColumn (COMMA selectColumn)* #selectSpecialColumns
     ;
 
 selectColumn: column=valueAtom (AS? alias=identifierValue)?;
 
 fromClause: FROM tableRefs;
 
-tableRefs: tableRef (COMMA tableRef);
+tableRefs: tableRef (COMMA tableRef)?;
 
-tableRef: table=identifierValue (AS? alias=identifierValue);
+tableRef: table=identifierValue (AS? alias=identifierValue)?;
 
 whereClause: WHERE expression;
 
@@ -40,14 +40,14 @@ expression
 
 predicateExpr
     : fieldAtom IS NOT? NULL                 #isNullPredicate
-    | fieldAtom comparisonOperator valueAtom #binarycomparisonPredicate
+    | fieldAtom comparisonOperator valueAtom #binaryComparisonPredicate
     ;
 
-groupByClause: GROUP BY valueAtom (COMMA valueAtom)* havingClause;
+groupByClause: GROUP BY valueAtom (COMMA valueAtom)* havingClause?;
 
 havingClause: HAVING expression;
 
-orderByClause: ORDER BY orderByExpr (COMMA orderByExpr);
+orderByClause: ORDER BY orderByExpr (COMMA orderByExpr)*;
 
 orderByExpr: field=identifierValue order=sort? orderNullsExpr?;
 
@@ -55,7 +55,7 @@ sort: ASC | DESC;
 
 orderNullsExpr: NULLS value=(FIRST | LAST);
 
-limitClause: ( offset = INTEGER COMMA)? size = INTEGER;
+limitClause: LIMIT (offset = INTEGER COMMA)? size = INTEGER;
 
 fieldAtom: arithExpr;
 

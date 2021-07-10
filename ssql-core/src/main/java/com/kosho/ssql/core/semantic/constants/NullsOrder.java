@@ -7,9 +7,9 @@ package com.kosho.ssql.core.semantic.constants;
  * @since 2021-07-10
  */
 public enum NullsOrder {
-    NULLS_LAST("nulls last"),
+    LAST("last"),
 
-    NULLS_FIRST("nulls first");
+    FIRST("first");
 
     private final String value;
 

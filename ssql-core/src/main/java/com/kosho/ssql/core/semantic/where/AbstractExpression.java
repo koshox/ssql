@@ -9,10 +9,12 @@ package com.kosho.ssql.core.semantic.where;
 public abstract class AbstractExpression implements Expression {
     protected boolean bracketed;
 
+    @Override
     public boolean isBracketed() {
         return bracketed;
     }
 
+    @Override
     public void setBracketed(boolean bracketed) {
         this.bracketed = bracketed;
     }

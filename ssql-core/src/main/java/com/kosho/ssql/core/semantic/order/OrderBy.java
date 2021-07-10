@@ -15,10 +15,6 @@ import java.util.stream.Collectors;
 public class OrderBy implements SsqlSegment {
     private List<OrderItem> orderItems;
 
-    public OrderBy(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }

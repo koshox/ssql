@@ -18,15 +18,6 @@ public class GroupBy implements SsqlSegment {
 
     private Having having;
 
-    public GroupBy(List<Value> groupItems) {
-        this.groupItems = groupItems;
-    }
-
-    public GroupBy(List<Value> groupItems, Having having) {
-        this.groupItems = groupItems;
-        this.having = having;
-    }
-
     public List<Value> getGroupItems() {
         return groupItems;
     }

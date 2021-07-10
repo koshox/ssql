@@ -13,11 +13,6 @@ public class NumberValue implements Value {
 
     private String value;
 
-    public NumberValue(boolean negative, String value) {
-        this.negative = negative;
-        this.value = value;
-    }
-
     public boolean isNegative() {
         return negative;
     }

@@ -13,11 +13,6 @@ public class IdentifierValue implements Value {
 
     private String value;
 
-    public IdentifierValue(boolean quoted, String value) {
-        this.quoted = quoted;
-        this.value = value;
-    }
-
     public boolean isQuoted() {
         return quoted;
     }

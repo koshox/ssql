@@ -1,5 +1,7 @@
 package com.kosho.ssql.core.semantic.constants;
 
+import com.kosho.ssql.core.exception.SsqlException;
+
 /**
  * 算数操作符
  *
@@ -23,6 +25,7 @@ public enum ArithOperator {
         this.operator = operator;
     }
 
+
     public String getOperator() {
         return operator;
     }
@@ -30,5 +33,15 @@ public enum ArithOperator {
     @Override
     public String toString() {
         return operator;
+    }
+
+    public static ArithOperator from(String arithOp) {
+        for (ArithOperator arithOperator : ArithOperator.values()) {
+            if (arithOperator.getOperator().equals(arithOp)) {
+                return arithOperator;
+            }
+        }
+
+        throw new SsqlException("Unsupported arith operator: " + arithOp);
     }
 }

@@ -12,10 +12,6 @@ import com.kosho.ssql.core.semantic.constants.SegmentType;
 public class Where implements SsqlSegment {
     private Expression expression;
 
-    public Where(Expression expression) {
-        this.expression = expression;
-    }
-
     public Expression getExpression() {
         return expression;
     }

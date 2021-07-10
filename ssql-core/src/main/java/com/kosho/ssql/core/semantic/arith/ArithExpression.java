@@ -19,13 +19,6 @@ public class ArithExpression implements Value {
 
     private boolean bracketed;
 
-    public ArithExpression(Value left, ArithOperator operator, Value right, boolean bracketed) {
-        this.left = left;
-        this.operator = operator;
-        this.right = right;
-        this.bracketed = bracketed;
-    }
-
     public Value getLeft() {
         return left;
     }

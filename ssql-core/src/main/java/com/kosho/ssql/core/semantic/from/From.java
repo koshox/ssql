@@ -15,10 +15,6 @@ import java.util.stream.Collectors;
 public class From implements SsqlSegment {
     private List<Table> tables;
 
-    public From(List<Table> tables) {
-        this.tables = tables;
-    }
-
     public List<Table> getTables() {
         return tables;
     }

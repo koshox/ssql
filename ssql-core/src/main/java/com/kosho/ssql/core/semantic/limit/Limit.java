@@ -14,15 +14,6 @@ public class Limit implements SsqlSegment {
 
     private Integer limit;
 
-    public Limit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public Limit(Integer start, Integer limit) {
-        this.start = start;
-        this.limit = limit;
-    }
-
     public Integer getStart() {
         return start;
     }

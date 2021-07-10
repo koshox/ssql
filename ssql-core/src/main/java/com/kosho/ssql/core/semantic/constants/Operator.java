@@ -1,5 +1,7 @@
 package com.kosho.ssql.core.semantic.constants;
 
+import com.kosho.ssql.core.exception.SsqlException;
+
 /**
  * 操作符
  *
@@ -40,5 +42,15 @@ public enum Operator {
     @Override
     public String toString() {
         return symbol;
+    }
+
+    public static Operator from(String cmpOp) {
+        for (Operator operator : Operator.values()) {
+            if (operator.getSymbol().equals(cmpOp)) {
+                return operator;
+            }
+        }
+
+        throw new SsqlException("Unsupported operator: " + cmpOp);
     }
 }

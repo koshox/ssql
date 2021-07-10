@@ -11,15 +11,6 @@ public class Table {
 
     private String alias;
 
-    public Table(String name) {
-        this.name = name;
-    }
-
-    public Table(String name, String alias) {
-        this.name = name;
-        this.alias = alias;
-    }
-
     public String getName() {
         return name;
     }

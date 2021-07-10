@@ -13,10 +13,6 @@ import com.kosho.ssql.core.semantic.where.Expression;
 public class Having implements SsqlSegment {
     private Expression expression;
 
-    public Having(Expression expression) {
-        this.expression = expression;
-    }
-
     public Expression getExpression() {
         return expression;
     }

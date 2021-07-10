@@ -13,15 +13,6 @@ public class SelectItem {
 
     private Value field;
 
-    public SelectItem(Value field) {
-        this.field = field;
-    }
-
-    public SelectItem(String alias, Value field) {
-        this.alias = alias;
-        this.field = field;
-    }
-
     public String getAlias() {
         return alias;
     }

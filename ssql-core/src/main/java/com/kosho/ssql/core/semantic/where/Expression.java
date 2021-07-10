@@ -10,4 +10,8 @@ import com.kosho.ssql.core.semantic.constants.ExpressionType;
  */
 public interface Expression {
     ExpressionType type();
+
+    boolean isBracketed();
+
+    void setBracketed(boolean bracketed);
 }

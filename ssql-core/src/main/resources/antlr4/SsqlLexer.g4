@@ -1,6 +1,6 @@
 lexer grammar SsqlLexer;
 
-@header {package com.kosho.ssql.core.parser}
+@header {package com.kosho.ssql.core.parser;}
 
 channels {
     ERROR_CHANNEL
@@ -9,7 +9,10 @@ channels {
 // SKIP
 SPACE: [ \t\r\n]+ -> channel(HIDDEN);
 COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
-LINE_COMMENT: ('--' [ \t]? | '#' [ \t])? ~[\r\n]* ('r'?'\n' | EOF);
+LINE_COMMENT: (
+                  ('-- ' | '#') ~[\r\n]* ('\r'? '\n' | EOF)
+                  | '--' ('\r'? '\n' | EOF)
+              ) -> channel(HIDDEN);
 
 // KEYWORD
 SELECT: S E L E C T;

@@ -13,11 +13,6 @@ public class FieldValue implements Value {
 
     private IdentifierValue value;
 
-    public FieldValue(IdentifierValue owner, IdentifierValue value) {
-        this.owner = owner;
-        this.value = value;
-    }
-
     public IdentifierValue getOwner() {
         return owner;
     }
