@@ -6,13 +6,13 @@ options {
     tokenVocab=SsqlLexer;
 }
 
+// SSQL ROOT
 ssql: selectStatement EOF;
 
-selectStatement: simpleSelectStatement | bracketedSelectStatement;
-
-simpleSelectStatement: selectClause fromClause whereClause? groupByClause? orderByClause? limitClause?;
-
-bracketedSelectStatement: LBKT simpleSelectStatement RBKT | LBKT bracketedSelectStatement RBKT;
+// SELECT
+selectStatement
+    : selectClause fromClause whereClause? groupByClause? orderByClause? limitClause? #simpleSelectStatement
+    | LBKT selectStatement RBKT                                                       #bracketedSelectStatement;
 
 selectClause: SELECT DISTINCT? selectColumns;
 
@@ -23,12 +23,14 @@ selectColumns
 
 selectColumn: column=valueAtom (AS? alias=identifierValue)?;
 
+// FROM
 fromClause: FROM tableRefs;
 
 tableRefs: tableRef (COMMA tableRef)?;
 
 tableRef: table=identifierValue (AS? alias=identifierValue)?;
 
+// WHERE
 whereClause: WHERE expression;
 
 expression
@@ -43,10 +45,13 @@ predicateExpr
     | fieldAtom comparisonOperator valueAtom #binaryComparisonPredicate
     ;
 
+// GROUP BY
 groupByClause: GROUP BY valueAtom (COMMA valueAtom)* havingClause?;
 
+// HAVING
 havingClause: HAVING expression;
 
+// ORDER BY
 orderByClause: ORDER BY orderByExpr (COMMA orderByExpr)*;
 
 orderByExpr: field=identifierValue order=sort? orderNullsExpr?;
@@ -55,6 +60,7 @@ sort: ASC | DESC;
 
 orderNullsExpr: NULLS value=(FIRST | LAST);
 
+// LIMIT
 limitClause: LIMIT (offset = INTEGER COMMA)? size = INTEGER;
 
 fieldAtom: arithExpr;

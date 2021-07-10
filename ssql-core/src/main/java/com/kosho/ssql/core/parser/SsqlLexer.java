@@ -1,4 +1,4 @@
-// Generated from  by ANTLR 4.9.1
+// Generated from SsqlLexer.g4 by ANTLR 4.9.1
 package com.kosho.ssql.core.parser;
 
 import org.antlr.v4.runtime.*;

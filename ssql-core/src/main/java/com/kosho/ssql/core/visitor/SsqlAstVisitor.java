@@ -36,25 +36,7 @@ public class SsqlAstVisitor extends SsqlParserBaseVisitor<Object> {
 
     @Override
     public Object visitSsql(SsqlParser.SsqlContext ctx) {
-        return visit(ctx.getChild(0));
-    }
-
-    @Override
-    public Object visitSelectStatement(SsqlParser.SelectStatementContext ctx) {
-        if (ctx.simpleSelectStatement() != null) {
-            return visitSimpleSelectStatement(ctx.simpleSelectStatement());
-        }
-
-        return visitBracketedSelectStatement(ctx.bracketedSelectStatement());
-    }
-
-    @Override
-    public Object visitBracketedSelectStatement(SsqlParser.BracketedSelectStatementContext ctx) {
-        if (ctx.simpleSelectStatement() != null) {
-            return visitSimpleSelectStatement(ctx.simpleSelectStatement());
-        }
-
-        return visitBracketedSelectStatement(ctx.bracketedSelectStatement());
+        return visit(ctx.selectStatement());
     }
 
     @Override
@@ -85,6 +67,11 @@ public class SsqlAstVisitor extends SsqlParserBaseVisitor<Object> {
         }
 
         return ssql;
+    }
+
+    @Override
+    public Object visitBracketedSelectStatement(SsqlParser.BracketedSelectStatementContext ctx) {
+        return visit(ctx.selectStatement());
     }
 
     @Override

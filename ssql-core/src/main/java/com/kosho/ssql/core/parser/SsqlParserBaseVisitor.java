@@ -1,4 +1,4 @@
-// Generated from F:/my-git-proj/ssql/ssql-core/src/main/resources/antlr4\SsqlParser.g4 by ANTLR 4.9.1
+// Generated from SsqlParser.g4 by ANTLR 4.9.1
 package com.kosho.ssql.core.parser;
 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
@@ -20,17 +20,6 @@ public class SsqlParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
      */
     @Override
     public T visitSsql(SsqlParser.SsqlContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override
-    public T visitSelectStatement(SsqlParser.SelectStatementContext ctx) {
         return visitChildren(ctx);
     }
 

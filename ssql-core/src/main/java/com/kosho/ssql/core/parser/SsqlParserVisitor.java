@@ -1,4 +1,4 @@
-// Generated from F:/my-git-proj/ssql/ssql-core/src/main/resources/antlr4\SsqlParser.g4 by ANTLR 4.9.1
+// Generated from SsqlParser.g4 by ANTLR 4.9.1
 package com.kosho.ssql.core.parser;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -20,15 +20,8 @@ public interface SsqlParserVisitor<T> extends ParseTreeVisitor<T> {
     T visitSsql(SsqlParser.SsqlContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link SsqlParser#selectStatement}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitSelectStatement(SsqlParser.SelectStatementContext ctx);
-
-    /**
-     * Visit a parse tree produced by {@link SsqlParser#simpleSelectStatement}.
+     * Visit a parse tree produced by the {@code simpleSelectStatement}
+     * labeled alternative in {@link SsqlParser#selectStatement}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -36,7 +29,8 @@ public interface SsqlParserVisitor<T> extends ParseTreeVisitor<T> {
     T visitSimpleSelectStatement(SsqlParser.SimpleSelectStatementContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link SsqlParser#bracketedSelectStatement}.
+     * Visit a parse tree produced by the {@code bracketedSelectStatement}
+     * labeled alternative in {@link SsqlParser#selectStatement}.
      *
      * @param ctx the parse tree
      * @return the visitor result
