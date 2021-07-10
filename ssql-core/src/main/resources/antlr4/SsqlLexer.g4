@@ -55,20 +55,20 @@ PLUS: '+';
 MINUS: '-';
 
 // COMPARE OP
-EQUAL: '=';
-EQUALS: '==';
-NOT_EQUAL: '!=';
-GREATER: '>';
-GREATER_EQ: '>=';
-LESS: '<';
-LESS_EQ: '<=';
+EQ: '=';
+EQS: '==';
+NOT_EQ: '!=';
+GT: '>';
+GTE: '>=';
+LT: '<';
+LTE: '<=';
 AND_SYB: '&&';
 OR_SYB: '||';
 
 // CONSTRUCTORS
 DOT: '.';
 LBKT: '(';
-EBKT: ')';
+RBKT: ')';
 COMMA: ',';
 SEMI: ';';
 AT_SIGN: '@';
