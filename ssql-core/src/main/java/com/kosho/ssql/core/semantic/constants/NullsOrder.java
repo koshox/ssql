@@ -23,6 +23,6 @@ public enum NullsOrder {
 
     @Override
     public String toString() {
-        return value;
+        return "nulls " + value;
     }
 }

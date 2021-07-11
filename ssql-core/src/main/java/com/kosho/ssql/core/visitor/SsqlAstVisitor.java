@@ -251,8 +251,7 @@ public class SsqlAstVisitor extends SsqlParserBaseVisitor<Object> {
 
     @Override
     public Object visitOrderNullsExpr(SsqlParser.OrderNullsExprContext ctx) {
-        String text = ctx.getText().toLowerCase();
-        if (NullsOrder.FIRST.getValue().equals(text)) {
+        if (ctx.FIRST() != null) {
             return NullsOrder.FIRST;
         }
 
