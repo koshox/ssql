@@ -29,7 +29,6 @@ public class IdentifierValue implements Value {
         this.value = value;
     }
 
-
     @Override
     public ValueType type() {
         return ValueType.IDENTIFIER;

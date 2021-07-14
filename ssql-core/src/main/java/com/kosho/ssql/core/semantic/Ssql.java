@@ -13,6 +13,8 @@ import com.kosho.ssql.core.visitor.SsqlAstVisitor;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
+import java.util.Map;
+
 /**
  * Ssql表达式
  *
@@ -106,7 +108,7 @@ public class Ssql {
     /**
      * 编译为Ssql表达式
      *
-     * @param ssqlStr 字符串
+     * @param ssqlStr ssql字符串
      * @return Ssql表达式
      */
     public static Ssql compile(String ssqlStr) {
@@ -115,5 +117,18 @@ public class Ssql {
         parser.addErrorListener(SsqlErrorListener.INSTANCE);
         SsqlParser.SsqlContext context = parser.ssql();
         return (Ssql) SsqlAstVisitor.INSTANCE.visit(context);
+    }
+
+    /**
+     * 编译为Ssql表达式
+     *
+     * @param ssqlStr Ssql字符串
+     * @param params  Ssql参数
+     * @return Ssql表达式
+     */
+    public static Ssql compile(String ssqlStr, Map<String, Object> params) {
+        Ssql ssql = compile(ssqlStr);
+        new SsqlVarReplacer(params).replaceVar(ssql);
+        return ssql;
     }
 }
