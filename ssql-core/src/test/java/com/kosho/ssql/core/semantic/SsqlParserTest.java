@@ -34,6 +34,10 @@ class SsqlParserTest {
         // where
         arguments.add(Arguments.of("select * from t_user where name = 'foo'", "select * from t_user where name = 'foo'"));
         arguments.add(Arguments.of("select * from t_user where name = 'foo' or age > 20", "select * from t_user where name = 'foo' or age > 20"));
+        arguments.add(Arguments.of("select * from t_user where age in (12, 13, 14)", "select * from t_user where age in (12, 13, 14)"));
+        arguments.add(Arguments.of("select * from t_user where name = $name and age = $age", "select * from t_user where name = $name and age = $age"));
+        arguments.add(Arguments.of("select * from t_user where name = $name and age in $age", "select * from t_user where name = $name and age in $age"));
+        arguments.add(Arguments.of("select * from t_user where name = $name and age in ($age1, $age2)", "select * from t_user where name = $name and age in ($age1, $age2)"));
 
         // group by
         arguments.add(Arguments.of("select name from t_user group by name", "select name from t_user group by name"));

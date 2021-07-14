@@ -189,6 +189,15 @@ public class SsqlAstVisitor extends SsqlParserBaseVisitor<Object> {
     }
 
     @Override
+    public Object visitInPredicate(SsqlParser.InPredicateContext ctx) {
+        OperationExpression expression = new OperationExpression();
+        expression.setField((Value) visit(ctx.fieldAtom()));
+        expression.setOperator(Operator.IN);
+        expression.setValue((Value) (ctx.listValue() != null ? visit(ctx.listValue()) : visit(ctx.varValue())));
+        return expression;
+    }
+
+    @Override
     public Object visitGroupByClause(SsqlParser.GroupByClauseContext ctx) {
         GroupBy groupBy = new GroupBy();
         List<Value> groupItems = new ArrayList<>();
@@ -313,6 +322,24 @@ public class SsqlAstVisitor extends SsqlParserBaseVisitor<Object> {
 
         fieldValue.setValue((IdentifierValue) visitIdentifierValue(ctx.name));
         return fieldValue;
+    }
+
+    @Override
+    public Object visitListValue(SsqlParser.ListValueContext ctx) {
+        ListValue listValue = new ListValue();
+        List<Value> values = new ArrayList<>();
+        for (SsqlParser.ValueAtomContext valueAtom : ctx.valueAtom()) {
+            Value value = (Value) visitValueAtom(valueAtom);
+            values.add(value);
+        }
+
+        listValue.setValues(values);
+        return listValue;
+    }
+
+    @Override
+    public Object visitVarValue(SsqlParser.VarValueContext ctx) {
+        return new VarValue(ctx.ID().getText());
     }
 
     // TODO add function

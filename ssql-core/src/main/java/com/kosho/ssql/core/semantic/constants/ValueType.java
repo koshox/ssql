@@ -17,5 +17,9 @@ public enum ValueType {
 
     IDENTIFIER,
 
-    ARITH;
+    ARITH,
+
+    VAR,
+
+    LIST
 }

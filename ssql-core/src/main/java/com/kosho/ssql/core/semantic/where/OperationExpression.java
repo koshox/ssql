@@ -49,9 +49,9 @@ public class OperationExpression extends AbstractExpression {
     @Override
     public String toString() {
         if (!bracketed) {
-            return field.toString() + " " + operator + (value == null? "":" " + value.toString());
+            return field.toString() + " " + operator + (value == null ? "" : " " + value.toString());
         }
 
-        return "(" +  field.toString() + " " + operator + (value == null? "":" " + value.toString()) +")";
+        return "(" + field.toString() + " " + operator + (value == null ? "" : " " + value.toString()) + ")";
     }
 }

@@ -7,7 +7,7 @@ options {
 }
 
 // SSQL ROOT
-ssql: selectStatement EOF;
+ssql: selectStatement SEMI? EOF;
 
 // SELECT
 selectStatement
@@ -43,6 +43,7 @@ expression
 predicateExpr
     : fieldAtom IS NOT? NULL                 #isNullPredicate
     | fieldAtom comparisonOperator valueAtom #binaryComparisonPredicate
+    | fieldAtom IN (listValue | varValue)    #inPredicate
     ;
 
 // GROUP BY
@@ -78,9 +79,14 @@ arithExpr
 simpleValueAtom
     : fieldValue
     | identifierValue
+    | varValue
     | constant
     | functionExpr
     ;
+
+listValue: LBKT valueAtom (COMMA valueAtom)* RBKT;
+
+varValue: DOLLAR ID;
 
 fieldValue: (owner=identifierValue DOT) ? name=identifierValue;
 

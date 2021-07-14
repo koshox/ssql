@@ -9,7 +9,7 @@ import com.kosho.ssql.core.semantic.constants.LogicalRelation;
  * @author Kosho
  * @since 2021-07-10
  */
-public class LogicalExpression extends AbstractExpression{
+public class LogicalExpression extends AbstractExpression {
     private Expression left;
 
     private LogicalRelation relation;

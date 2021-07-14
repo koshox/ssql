@@ -43,6 +43,6 @@ public class OrderItem {
 
     @Override
     public String toString() {
-        return field + (sort == null ? "" :" " + sort) + (nullsOrder == null ? "" :" " + nullsOrder);
+        return field + (sort == null ? "" : " " + sort) + (nullsOrder == null ? "" : " " + nullsOrder);
     }
 }

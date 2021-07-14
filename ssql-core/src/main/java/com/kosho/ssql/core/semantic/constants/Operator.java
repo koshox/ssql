@@ -21,6 +21,8 @@ public enum Operator {
 
     LTE("<="),
 
+    IN("in"),
+
     LIKE("like"),
 
     NOT_LIKE("not like"),

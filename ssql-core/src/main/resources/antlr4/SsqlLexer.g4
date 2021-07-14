@@ -38,7 +38,6 @@ AND: A N D;
 OR: O R;
 NOT: N O T;
 IS: I S;
-IN: I N;
 LIKE: L I K E;
 CONTAINS: C O N T A I N S;
 BETWEEN: B E T W E E N;
@@ -65,8 +64,7 @@ GT: '>';
 GTE: '>=';
 LT: '<';
 LTE: '<=';
-AND_SYB: '&&';
-OR_SYB: '||';
+IN: I N;
 
 // CONSTRUCTORS
 DOT: '.';
@@ -79,6 +77,7 @@ SINGLE_QUOTE: '\'';
 DOUBLE_QUOTE: '"';
 REVERSE_QUOTE: '`';
 COLON: ':';
+DOLLAR: '$';
 
 // STRING
 SQUOTE_STRING: '\'' ('\\'. | '\'\'' | ~('\'' | '\\'))* '\'';

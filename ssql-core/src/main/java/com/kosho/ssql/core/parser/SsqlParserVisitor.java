@@ -1,4 +1,4 @@
-// Generated from SsqlParser.g4 by ANTLR 4.9.1
+// Generated from by ANTLR 4.9.1
 package com.kosho.ssql.core.parser;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -149,6 +149,15 @@ public interface SsqlParserVisitor<T> extends ParseTreeVisitor<T> {
     T visitBinaryComparisonPredicate(SsqlParser.BinaryComparisonPredicateContext ctx);
 
     /**
+     * Visit a parse tree produced by the {@code inPredicate}
+     * labeled alternative in {@link SsqlParser#predicateExpr}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInPredicate(SsqlParser.InPredicateContext ctx);
+
+    /**
      * Visit a parse tree produced by {@link SsqlParser#groupByClause}.
      *
      * @param ctx the parse tree
@@ -263,6 +272,22 @@ public interface SsqlParserVisitor<T> extends ParseTreeVisitor<T> {
      * @return the visitor result
      */
     T visitSimpleValueAtom(SsqlParser.SimpleValueAtomContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link SsqlParser#listValue}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitListValue(SsqlParser.ListValueContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link SsqlParser#varValue}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitVarValue(SsqlParser.VarValueContext ctx);
 
     /**
      * Visit a parse tree produced by {@link SsqlParser#fieldValue}.

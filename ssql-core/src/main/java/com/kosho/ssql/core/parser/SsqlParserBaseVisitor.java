@@ -1,4 +1,4 @@
-// Generated from SsqlParser.g4 by ANTLR 4.9.1
+// Generated from by ANTLR 4.9.1
 package com.kosho.ssql.core.parser;
 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
@@ -195,6 +195,17 @@ public class SsqlParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
+    public T visitInPredicate(SsqlParser.InPredicateContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
     public T visitGroupByClause(SsqlParser.GroupByClauseContext ctx) {
         return visitChildren(ctx);
     }
@@ -339,6 +350,28 @@ public class SsqlParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
      */
     @Override
     public T visitSimpleValueAtom(SsqlParser.SimpleValueAtomContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitListValue(SsqlParser.ListValueContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitVarValue(SsqlParser.VarValueContext ctx) {
         return visitChildren(ctx);
     }
 
