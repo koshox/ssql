@@ -1,0 +1,79 @@
+[
+  {
+    "ssql": "select * from t_user order by name",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "match_all": {
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "sort": [
+        {
+          "name": {
+            "order": "asc"
+          }
+        }
+      ],
+      "track_total_hits": -1
+    }
+  },
+  {
+    "ssql": "select * from t_user order by name desc",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "match_all": {
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "sort": [
+        {
+          "name": {
+            "order": "desc"
+          }
+        }
+      ],
+      "track_total_hits": -1
+    }
+  },
+  {
+    "ssql": "select * from t_user order by name desc, age asc",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "match_all": {
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "sort": [
+        {
+          "name": {
+            "order": "desc"
+          }
+        },
+        {
+          "age": {
+            "order": "asc"
+          }
+        }
+      ],
+      "track_total_hits": -1
+    }
+  }
+]

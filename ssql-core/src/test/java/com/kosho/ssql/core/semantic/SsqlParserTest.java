@@ -10,6 +10,12 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Ssql解析器测试
+ *
+ * @author Kosho
+ * @since 2021-07-15
+ */
 class SsqlParserTest {
     @ParameterizedTest
     @MethodSource("parserTestParamGen")

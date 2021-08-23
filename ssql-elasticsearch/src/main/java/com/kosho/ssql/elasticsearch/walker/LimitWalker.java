@@ -25,7 +25,12 @@ public class LimitWalker extends AbstractSsql2EqlAstWalker {
             return;
         }
 
-        eqlResult.setFrom(limit.getLimit());
-        eqlResult.setSize(Math.min(limit.getLimit(), context.getSsql2EqlParams().getMaxLimit()));
+        if (limit.getStart() != null) {
+            eqlResult.setFrom(limit.getStart());
+        }
+
+        if (limit.getLimit() != null) {
+            eqlResult.setSize(Math.min(limit.getLimit(), context.getSsql2EqlParams().getMaxLimit()));
+        }
     }
 }

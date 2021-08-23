@@ -2,11 +2,17 @@ package com.kosho.ssql.elasticsearch;
 
 import com.kosho.ssql.core.exception.SsqlException;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.common.bytes.BytesReference;
+import org.elasticsearch.common.xcontent.ToXContent;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.script.Script;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.sort.SortBuilder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,33 +45,64 @@ public class Ssql2EqlResult {
 
     private QueryBuilder condition;
 
-    private SearchRequest searchRequest;
+    private SearchSourceBuilder searchSourceBuilder;
 
+    /**
+     * 转换为SearchRequest对象
+     *
+     * @return SearchRequest
+     */
     public SearchRequest toSearchRequest() {
-        if (searchRequest != null) {
-            return searchRequest;
-        }
-
         if (indices.isEmpty()) {
             throw new SsqlException("Indices can not be empty");
         }
 
-        searchRequest = new SearchRequest();
+        SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices(indices.toArray(new String[0]));
+        searchRequest.source(toSearchRequestBuilder());
+        return searchRequest;
+    }
 
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.fetchSource(fetchSource);
+    /**
+     * 转换为ES Query DSL
+     *
+     * @return DSL
+     */
+    public String toDsl() {
+        return toSearchRequestBuilder().toString();
+    }
+
+    /**
+     * 转换为格式化ES Query DSL
+     *
+     * @return 格式化DSL
+     */
+    public String toPrettyDsl() {
+        SearchSourceBuilder toXContent = toSearchRequestBuilder();
+        try (XContentBuilder builder = XContentBuilder.builder(XContentType.JSON.xContent())) {
+            builder.humanReadable(true).prettyPrint();
+            toXContent.toXContent(builder, ToXContent.EMPTY_PARAMS);
+            return BytesReference.bytes(builder).utf8ToString();
+        } catch (IOException e) {
+            throw new SsqlException(e);
+        }
+    }
+
+    private SearchSourceBuilder toSearchRequestBuilder() {
+        if (searchSourceBuilder != null) {
+            return searchSourceBuilder;
+        }
+
+        searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.from(from);
         searchSourceBuilder.size(size);
         searchSourceBuilder.trackTotalHits(trackTotalHits);
         searchSourceBuilder.query(condition);
+        searchSourceBuilder.fetchSource(new FetchSourceContext(fetchSource, includes.toArray(new String[0]), excludes.toArray(new String[0])));
 
         orderBy.forEach(searchSourceBuilder::sort);
         scriptFields.forEach(searchSourceBuilder::scriptField);
-
-        searchRequest.source(searchSourceBuilder);
-
-        return searchRequest;
+        return searchSourceBuilder;
     }
 
     public boolean isTrackTotalHits() {

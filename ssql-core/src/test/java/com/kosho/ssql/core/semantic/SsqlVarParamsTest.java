@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
+ * 参数化变量替换测试
+ *
  * @author Kosho
  * @since 2021-07-15
  */

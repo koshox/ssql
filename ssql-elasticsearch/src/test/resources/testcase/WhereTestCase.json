@@ -1,0 +1,140 @@
+[
+  {
+    "ssql": "select * from t_user where name = 'kosho'",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "term": {
+          "name": {
+            "value": "kosho",
+            "boost": 1.0
+          }
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  },
+  {
+    "ssql": "select * from t_user where name = 'kosho' and age > 25",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "name": {
+                  "value": "kosho",
+                  "boost": 1.0
+                }
+              }
+            },
+            {
+              "range": {
+                "age": {
+                  "from": 25,
+                  "to": null,
+                  "include_lower": false,
+                  "include_upper": true,
+                  "boost": 1.0
+                }
+              }
+            }
+          ],
+          "adjust_pure_negative": true,
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  },
+  {
+    "ssql": "select * from t_user where name = 'kosho' or age > 25",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "term": {
+                "name": {
+                  "value": "kosho",
+                  "boost": 1.0
+                }
+              }
+            },
+            {
+              "range": {
+                "age": {
+                  "from": 25,
+                  "to": null,
+                  "include_lower": false,
+                  "include_upper": true,
+                  "boost": 1.0
+                }
+              }
+            }
+          ],
+          "adjust_pure_negative": true,
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  },
+  {
+    "ssql": "select * from t_user where name is not null",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "exists": {
+          "field": "name",
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  },
+  {
+    "ssql": "select * from t_user where age in (20, 25, 30)",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "terms": {
+          "age": [
+            20,
+            25,
+            30
+          ],
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  }
+]

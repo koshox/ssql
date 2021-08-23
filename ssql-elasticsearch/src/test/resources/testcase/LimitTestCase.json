@@ -1,0 +1,36 @@
+[
+  {
+    "ssql": "select * from t_user limit 100",
+    "expectDsl": {
+      "from": 0,
+      "size": 100,
+      "query": {
+        "match_all": {
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  },
+  {
+    "ssql": "select * from t_user limit 50, 100",
+    "expectDsl": {
+      "from": 50,
+      "size": 100,
+      "query": {
+        "match_all": {
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  }
+]

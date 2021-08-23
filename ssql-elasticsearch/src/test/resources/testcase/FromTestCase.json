@@ -1,0 +1,38 @@
+[
+  {
+    "ssql": "select * from t_user",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "match_all": {
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  },
+  {
+    "ssql": "select u.name from t_user u",
+    "expectDsl": {
+      "from": 0,
+      "size": 50,
+      "query": {
+        "match_all": {
+          "boost": 1.0
+        }
+      },
+      "_source": {
+        "includes": [
+          "name"
+        ],
+        "excludes": []
+      },
+      "track_total_hits": -1
+    }
+  }
+]
