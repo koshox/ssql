@@ -25,6 +25,8 @@ public class Ssql2EqlResult {
 
     private int size = 10;
 
+    private boolean fetchSource;
+
     private final List<String> indices = new ArrayList<>();
 
     private final List<String> includes = new ArrayList<>();
@@ -52,6 +54,7 @@ public class Ssql2EqlResult {
         searchRequest.indices(indices.toArray(new String[0]));
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.fetchSource(fetchSource);
         searchSourceBuilder.from(from);
         searchSourceBuilder.size(size);
         searchSourceBuilder.trackTotalHits(trackTotalHits);
@@ -87,6 +90,14 @@ public class Ssql2EqlResult {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public boolean isFetchSource() {
+        return fetchSource;
+    }
+
+    public void setFetchSource(boolean fetchSource) {
+        this.fetchSource = fetchSource;
     }
 
     public List<String> getIndices() {

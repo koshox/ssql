@@ -9,5 +9,5 @@ package com.kosho.ssql.core.semantic.constants;
 public enum ExpressionType {
     LOGICAL,
 
-    OPERATION;
+    OPERATION
 }

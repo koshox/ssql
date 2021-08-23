@@ -38,11 +38,11 @@ public class FromWalker extends AbstractSsql2EqlAstWalker {
 
         Ssql2EqlRewriter rewriter = context.getRewriter();
         if (rewriter == null) {
-            context.getSsql2EqlResult().getIndices().add(table.getName());
+            eqlResult.getIndices().add(table.getName());
             return;
         }
 
         List<String> indices = rewriter.rewriteTableName(table.getName());
-        context.getSsql2EqlResult().getIndices().addAll(indices);
+        eqlResult.getIndices().addAll(indices);
     }
 }

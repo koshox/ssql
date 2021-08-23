@@ -28,10 +28,14 @@ public class SelectWalker extends AbstractSsql2EqlAstWalker {
         }
 
         if (select.isStar()) {
+            eqlResult.setFetchSource(true);
             return;
         }
 
         select.getSelectItems().forEach(this::walk);
+        if (!eqlResult.getIncludes().isEmpty()) {
+            eqlResult.setFetchSource(true);
+        }
     }
 
     private void walk(SelectItem selectItem) {
@@ -54,7 +58,7 @@ public class SelectWalker extends AbstractSsql2EqlAstWalker {
                 break;
 
             case IDENTIFIER:
-                fieldName =((IdentifierValue)field).getValue();
+                fieldName = ((IdentifierValue) field).getValue();
                 walk(fieldName);
                 break;
 
@@ -66,6 +70,6 @@ public class SelectWalker extends AbstractSsql2EqlAstWalker {
 
     private void walk(String fieldName) {
         fieldName = resolveField(fieldName);
-        context.getSsql2EqlResult().getIncludes().add(fieldName);
+        eqlResult.getIncludes().add(fieldName);
     }
 }

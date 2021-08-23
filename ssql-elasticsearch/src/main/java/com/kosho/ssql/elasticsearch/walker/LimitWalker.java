@@ -19,15 +19,14 @@ public class LimitWalker extends AbstractSsql2EqlAstWalker {
     @Override
     public void walk(Ssql ssql) {
         Limit limit = ssql.getLimit();
-        Ssql2EqlResult ssql2EqlResult = context.getSsql2EqlResult();
 
         if (limit == null) {
-            ssql2EqlResult.setFrom(0);
-            ssql2EqlResult.setSize(context.getSsql2EqlParams().getDefaultLimit());
+            eqlResult.setFrom(0);
+            eqlResult.setSize(context.getSsql2EqlParams().getDefaultLimit());
             return;
         }
 
-        ssql2EqlResult.setFrom(limit.getLimit());
-        ssql2EqlResult.setSize(Math.min(limit.getLimit(), context.getSsql2EqlParams().getMaxLimit()));
+        eqlResult.setFrom(limit.getLimit());
+        eqlResult.setSize(Math.min(limit.getLimit(), context.getSsql2EqlParams().getMaxLimit()));
     }
 }
