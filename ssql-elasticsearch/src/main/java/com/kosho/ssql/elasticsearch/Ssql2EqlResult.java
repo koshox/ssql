@@ -33,7 +33,7 @@ public class Ssql2EqlResult {
 
     private final List<String> excludes = new ArrayList<>();
 
-    private final List<SortBuilder> orderBy = new ArrayList<>();
+    private final List<SortBuilder<?>> orderBy = new ArrayList<>();
 
     private final Map<String, Script> scriptFields = new HashMap<>();
 
@@ -112,7 +112,7 @@ public class Ssql2EqlResult {
         return excludes;
     }
 
-    public List<SortBuilder> getOrderBy() {
+    public List<SortBuilder<?>> getOrderBy() {
         return orderBy;
     }
 

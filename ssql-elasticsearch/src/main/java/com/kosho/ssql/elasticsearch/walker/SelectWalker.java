@@ -3,8 +3,6 @@ package com.kosho.ssql.elasticsearch.walker;
 import com.kosho.ssql.core.semantic.Ssql;
 import com.kosho.ssql.core.semantic.select.Select;
 import com.kosho.ssql.core.semantic.select.SelectItem;
-import com.kosho.ssql.core.semantic.value.FieldValue;
-import com.kosho.ssql.core.semantic.value.IdentifierValue;
 import com.kosho.ssql.core.semantic.value.Value;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
 
@@ -32,13 +30,13 @@ public class SelectWalker extends AbstractSsql2EqlAstWalker {
             return;
         }
 
-        select.getSelectItems().forEach(this::walk);
+        select.getSelectItems().forEach(this::walkSelectItem);
         if (!eqlResult.getIncludes().isEmpty()) {
             eqlResult.setFetchSource(true);
         }
     }
 
-    private void walk(SelectItem selectItem) {
+    private void walkSelectItem(SelectItem selectItem) {
         String alias = selectItem.getAlias();
         Value field = selectItem.getField();
 
@@ -46,30 +44,7 @@ public class SelectWalker extends AbstractSsql2EqlAstWalker {
             context.getSelectAliases().put(alias, field.toString());
         }
 
-        walk(field);
-    }
-
-    private void walk(Value field) {
-        String fieldName;
-        switch (field.type()) {
-            case FIELD:
-                fieldName = ((FieldValue) field).getValue().getValue();
-                walk(fieldName);
-                break;
-
-            case IDENTIFIER:
-                fieldName = ((IdentifierValue) field).getValue();
-                walk(fieldName);
-                break;
-
-            default:
-                unsupportedSemantic(field);
-                break;
-        }
-    }
-
-    private void walk(String fieldName) {
-        fieldName = resolveField(fieldName);
+        String fieldName = walkField(field);
         eqlResult.getIncludes().add(fieldName);
     }
 }

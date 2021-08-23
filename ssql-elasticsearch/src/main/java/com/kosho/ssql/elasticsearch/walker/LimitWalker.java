@@ -3,7 +3,6 @@ package com.kosho.ssql.elasticsearch.walker;
 import com.kosho.ssql.core.semantic.Ssql;
 import com.kosho.ssql.core.semantic.limit.Limit;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
-import com.kosho.ssql.elasticsearch.Ssql2EqlResult;
 
 /**
  * Limit表达式遍历

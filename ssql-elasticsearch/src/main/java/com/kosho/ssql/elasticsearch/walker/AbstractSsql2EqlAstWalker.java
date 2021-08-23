@@ -1,6 +1,10 @@
 package com.kosho.ssql.elasticsearch.walker;
 
 import com.kosho.ssql.core.exception.SsqlException;
+import com.kosho.ssql.core.semantic.value.FieldValue;
+import com.kosho.ssql.core.semantic.value.IdentifierValue;
+import com.kosho.ssql.core.semantic.value.StringValue;
+import com.kosho.ssql.core.semantic.value.Value;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
 import com.kosho.ssql.elasticsearch.Ssql2EqlResult;
 import com.kosho.ssql.elasticsearch.Ssql2EqlRewriter;
@@ -22,7 +26,23 @@ public abstract class AbstractSsql2EqlAstWalker implements Ssql2EqlAstWalker {
         this.eqlResult = context.getSsql2EqlResult();
     }
 
-    protected String resolveField(String fieldName) {
+    protected String walkField(Value field) {
+        switch (field.type()) {
+            case STRING:
+                return resolveFieldName(((StringValue) field).getValue());
+
+            case IDENTIFIER:
+                return resolveFieldName(((IdentifierValue) field).getValue());
+
+            case FIELD:
+                return resolveFieldName(((FieldValue) field).getValue().getValue());
+
+            default:
+                throw unsupportedSemanticEx(field);
+        }
+    }
+
+    private String resolveFieldName(String fieldName) {
         if (context.getTableAlias() != null) {
             fieldName = StringUtils.removeStart(fieldName, context.getTableAlias() + ".");
         }

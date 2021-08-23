@@ -2,7 +2,10 @@ package com.kosho.ssql.elasticsearch.walker;
 
 import com.kosho.ssql.core.semantic.Ssql;
 import com.kosho.ssql.core.semantic.constants.Operator;
-import com.kosho.ssql.core.semantic.value.*;
+import com.kosho.ssql.core.semantic.value.BooleanValue;
+import com.kosho.ssql.core.semantic.value.ListValue;
+import com.kosho.ssql.core.semantic.value.StringValue;
+import com.kosho.ssql.core.semantic.value.Value;
 import com.kosho.ssql.core.semantic.where.Expression;
 import com.kosho.ssql.core.semantic.where.LogicalExpression;
 import com.kosho.ssql.core.semantic.where.OperationExpression;
@@ -69,8 +72,8 @@ public class WhereWalker extends AbstractSsql2EqlAstWalker {
 
     private QueryBuilder walkOperationExpression(OperationExpression expression) {
         Operator operator = expression.getOperator();
-        String fieldName = walkExpressionField(expression.getField());
-        Object targetValue = walkExpressionValue(expression.getValue());
+        String fieldName = walkField(expression.getField());
+        Object targetValue = walkValue(expression.getValue());
         switch (operator) {
             case EQ:
                 return QueryBuilders.termQuery(fieldName, targetValue);
@@ -110,23 +113,7 @@ public class WhereWalker extends AbstractSsql2EqlAstWalker {
         }
     }
 
-    private String walkExpressionField(Value field) {
-        switch (field.type()) {
-            case STRING:
-                return resolveField(((StringValue) field).getValue());
-
-            case IDENTIFIER:
-                return resolveField(((IdentifierValue) field).getValue());
-
-            case FIELD:
-                return resolveField(((FieldValue) field).getValue().getValue());
-
-            default:
-                throw unsupportedSemanticEx(field);
-        }
-    }
-
-    private Object walkExpressionValue(Value value) {
+    private Object walkValue(Value value) {
         if (value == null) {
             return null;
         }
@@ -148,7 +135,7 @@ public class WhereWalker extends AbstractSsql2EqlAstWalker {
 
             case LIST:
                 return ((ListValue) value).getValues().stream()
-                        .map(this::walkExpressionValue)
+                        .map(this::walkValue)
                         .collect(Collectors.toList());
 
             default:

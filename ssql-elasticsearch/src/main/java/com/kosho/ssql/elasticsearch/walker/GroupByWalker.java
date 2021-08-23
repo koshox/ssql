@@ -16,6 +16,6 @@ public class GroupByWalker extends AbstractSsql2EqlAstWalker {
 
     @Override
     public void walk(Ssql ssql) {
-
+        // TODO
     }
 }
