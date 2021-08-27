@@ -1,6 +1,6 @@
 lexer grammar SsqlLexer;
 
-@header {package com.kosho.ssql.core.parser;}
+@header {package com.kosho.ssql.core.dsl.parser;}
 
 channels {
     ERROR_CHANNEL

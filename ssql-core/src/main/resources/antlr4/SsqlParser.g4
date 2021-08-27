@@ -1,6 +1,6 @@
 parser grammar SsqlParser;
 
-@header {package com.kosho.ssql.core.parser;}
+@header {package com.kosho.ssql.core.dsl.parser;}
 
 options {
     tokenVocab=SsqlLexer;
