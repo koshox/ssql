@@ -1,8 +1,8 @@
 package com.kosho.ssql.elasticsearch.walker;
 
-import com.kosho.ssql.core.semantic.Ssql;
-import com.kosho.ssql.core.semantic.from.From;
-import com.kosho.ssql.core.semantic.from.Table;
+import com.kosho.ssql.core.dsl.semantic.Ssql;
+import com.kosho.ssql.core.dsl.semantic.from.From;
+import com.kosho.ssql.core.dsl.semantic.from.Table;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
 import com.kosho.ssql.elasticsearch.Ssql2EqlRewriter;
 import org.apache.commons.collections4.CollectionUtils;

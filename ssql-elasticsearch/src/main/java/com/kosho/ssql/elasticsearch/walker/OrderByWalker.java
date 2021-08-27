@@ -1,9 +1,9 @@
 package com.kosho.ssql.elasticsearch.walker;
 
-import com.kosho.ssql.core.semantic.Ssql;
-import com.kosho.ssql.core.semantic.constants.SortType;
-import com.kosho.ssql.core.semantic.order.OrderBy;
-import com.kosho.ssql.core.semantic.order.OrderItem;
+import com.kosho.ssql.core.dsl.semantic.Ssql;
+import com.kosho.ssql.core.dsl.semantic.constants.SortType;
+import com.kosho.ssql.core.dsl.semantic.order.OrderBy;
+import com.kosho.ssql.core.dsl.semantic.order.OrderItem;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;

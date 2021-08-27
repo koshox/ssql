@@ -1,6 +1,6 @@
 package com.kosho.ssql.elasticsearch.walker;
 
-import com.kosho.ssql.core.semantic.Ssql;
+import com.kosho.ssql.core.dsl.semantic.Ssql;
 
 /**
  * Ssql2Eql表达式遍历者

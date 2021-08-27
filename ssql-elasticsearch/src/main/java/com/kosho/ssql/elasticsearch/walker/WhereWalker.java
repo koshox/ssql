@@ -1,15 +1,15 @@
 package com.kosho.ssql.elasticsearch.walker;
 
-import com.kosho.ssql.core.semantic.Ssql;
-import com.kosho.ssql.core.semantic.constants.Operator;
-import com.kosho.ssql.core.semantic.value.BooleanValue;
-import com.kosho.ssql.core.semantic.value.ListValue;
-import com.kosho.ssql.core.semantic.value.StringValue;
-import com.kosho.ssql.core.semantic.value.Value;
-import com.kosho.ssql.core.semantic.where.Expression;
-import com.kosho.ssql.core.semantic.where.LogicalExpression;
-import com.kosho.ssql.core.semantic.where.OperationExpression;
-import com.kosho.ssql.core.semantic.where.Where;
+import com.kosho.ssql.core.dsl.semantic.Ssql;
+import com.kosho.ssql.core.dsl.semantic.constants.Operator;
+import com.kosho.ssql.core.dsl.semantic.value.BooleanValue;
+import com.kosho.ssql.core.dsl.semantic.value.ListValue;
+import com.kosho.ssql.core.dsl.semantic.value.StringValue;
+import com.kosho.ssql.core.dsl.semantic.value.Value;
+import com.kosho.ssql.core.dsl.semantic.where.Expression;
+import com.kosho.ssql.core.dsl.semantic.where.LogicalExpression;
+import com.kosho.ssql.core.dsl.semantic.where.OperationExpression;
+import com.kosho.ssql.core.dsl.semantic.where.Where;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;

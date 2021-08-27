@@ -1,10 +1,10 @@
 package com.kosho.ssql.elasticsearch.walker;
 
 import com.kosho.ssql.core.exception.SsqlException;
-import com.kosho.ssql.core.semantic.value.FieldValue;
-import com.kosho.ssql.core.semantic.value.IdentifierValue;
-import com.kosho.ssql.core.semantic.value.StringValue;
-import com.kosho.ssql.core.semantic.value.Value;
+import com.kosho.ssql.core.dsl.semantic.value.FieldValue;
+import com.kosho.ssql.core.dsl.semantic.value.IdentifierValue;
+import com.kosho.ssql.core.dsl.semantic.value.StringValue;
+import com.kosho.ssql.core.dsl.semantic.value.Value;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
 import com.kosho.ssql.elasticsearch.Ssql2EqlResult;
 import com.kosho.ssql.elasticsearch.Ssql2EqlRewriter;

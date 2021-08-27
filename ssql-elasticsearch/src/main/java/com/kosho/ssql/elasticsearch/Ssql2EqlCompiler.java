@@ -1,7 +1,7 @@
 package com.kosho.ssql.elasticsearch;
 
-import com.kosho.ssql.core.semantic.Ssql;
-import com.kosho.ssql.core.semantic.SsqlVarReplacer;
+import com.kosho.ssql.core.dsl.semantic.Ssql;
+import com.kosho.ssql.core.dsl.semantic.SsqlVarReplacer;
 import com.kosho.ssql.elasticsearch.walker.*;
 
 import java.util.Arrays;

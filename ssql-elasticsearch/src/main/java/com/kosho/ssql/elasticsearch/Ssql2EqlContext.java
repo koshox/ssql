@@ -1,6 +1,6 @@
 package com.kosho.ssql.elasticsearch;
 
-import com.kosho.ssql.core.semantic.value.Value;
+import com.kosho.ssql.core.dsl.semantic.value.Value;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;

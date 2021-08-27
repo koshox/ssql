@@ -1,9 +1,9 @@
 package com.kosho.ssql.elasticsearch.walker;
 
-import com.kosho.ssql.core.semantic.Ssql;
-import com.kosho.ssql.core.semantic.select.Select;
-import com.kosho.ssql.core.semantic.select.SelectItem;
-import com.kosho.ssql.core.semantic.value.Value;
+import com.kosho.ssql.core.dsl.semantic.Ssql;
+import com.kosho.ssql.core.dsl.semantic.select.Select;
+import com.kosho.ssql.core.dsl.semantic.select.SelectItem;
+import com.kosho.ssql.core.dsl.semantic.value.Value;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
 
 /**
