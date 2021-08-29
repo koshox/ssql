@@ -108,3 +108,19 @@ ES索引: ["t_user_1", "t_user_2", "t_user_4"]
 2. DateTimeInterval 时间日期间隔分片
 3. HashMod          Hash取模分片
 4. Mod              数字取模分片
+
+扩展示例：
+```java
+@Spi("Custom")
+public class HashModShardingAlgorithm implements ShardingAlgorithm {
+    @Override
+    public Optional<ShardingTable> doPreciseSharding(ShardingTableRule rule, Comparable<?> shardingValue) {
+        ...
+    }
+
+    @Override
+    public List<ShardingTable> doRangeSharding(ShardingTableRule rule, Range<Comparable<?>> shardingRange) {
+        ...
+    }
+}
+```
