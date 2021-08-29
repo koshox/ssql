@@ -102,7 +102,7 @@ void useNumberIntervalRule() {
 ES索引: ["t_user_1", "t_user_2", "t_user_4"]
 ```
 
-支持通过SPI的方式自定义ShardingAlgorithm(分片算法) <br>
+支持通过SPI的方式扩展自定义分片算法 <br>
 当前已支持：
 1. NumberInterval   数字间隔分片
 2. DateTimeInterval 时间日期间隔分片
