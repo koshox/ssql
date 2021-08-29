@@ -38,7 +38,6 @@ class StandardShardingConditionRouter implements ShardingConditionRouter {
         String algorithmName = shardingTableRule.getShardingStrategy().getShardingAlgorithm();
         ShardingAlgorithm shardingAlgorithm = ShardingAlgorithmFactory.getShardingAlgorithm(algorithmName);
 
-        List<ShardingTable> shardingTables = shardingTableRule.getShardingTables();
         List<ShardingTable> result = new ArrayList<>();
         for (ShardingCondition condition : shardingConditions.getConditions()) {
             route(shardingTableRule, condition, result, shardingAlgorithm);
