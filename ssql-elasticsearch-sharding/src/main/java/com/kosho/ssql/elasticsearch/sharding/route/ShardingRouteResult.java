@@ -2,10 +2,7 @@ package com.kosho.ssql.elasticsearch.sharding.route;
 
 import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTable;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 分片路由结果
@@ -25,7 +22,7 @@ public class ShardingRouteResult {
     }
 
     public static ShardingRouteResult of(List<ShardingTable> shardingTables) {
-        return new ShardingRouteResult(new HashSet<>(shardingTables));
+        return new ShardingRouteResult(new LinkedHashSet<>(shardingTables));
     }
 
     public static ShardingRouteResult empty() {
