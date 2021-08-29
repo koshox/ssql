@@ -9,5 +9,8 @@ import com.kosho.ssql.core.dsl.semantic.constants.SegmentType;
  * @since 2021-7-10
  */
 public interface SsqlSegment {
+    /**
+     * 子表达式类型
+     */
     SegmentType type();
 }

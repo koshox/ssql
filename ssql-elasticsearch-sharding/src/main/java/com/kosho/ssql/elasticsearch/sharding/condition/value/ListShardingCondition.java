@@ -1,5 +1,7 @@
 package com.kosho.ssql.elasticsearch.sharding.condition.value;
 
+import com.google.common.base.Joiner;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -24,5 +26,14 @@ public class ListShardingCondition extends AbstractShardingCondition {
 
     public List<Comparable<?>> getValues() {
         return values;
+    }
+
+    @Override
+    public String toString() {
+        if (values.size() == 1) {
+            return shardingColumn + " = " + values.get(0);
+        }
+
+        return shardingColumn + " in (" + Joiner.on(", ").join(values) + ")";
     }
 }

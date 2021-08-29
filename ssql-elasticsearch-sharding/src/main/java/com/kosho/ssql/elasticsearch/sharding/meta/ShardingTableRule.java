@@ -9,10 +9,19 @@ import java.util.List;
  * @since 2021-08-27
  */
 public class ShardingTableRule {
+    /**
+     * 逻辑表明
+     */
     private String logicalTableName;
 
+    /**
+     * 分片表集合
+     */
     private List<ShardingTable> shardingTables;
 
+    /**
+     * 分片策略
+     */
     private ShardingStrategy shardingStrategy;
 
     public String getLogicalTableName() {

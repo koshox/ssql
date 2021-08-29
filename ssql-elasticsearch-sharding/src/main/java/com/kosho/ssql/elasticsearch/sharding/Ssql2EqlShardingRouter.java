@@ -29,6 +29,12 @@ public class Ssql2EqlShardingRouter {
         return INSTANCE.get();
     }
 
+    /**
+     * ssql表达式分片路由
+     *
+     * @param ssql ssql表达式
+     * @return 路由结果
+     */
     public ShardingRouteResult route(Ssql ssql) {
         ShardingTableRule shardingTableRule = ShardingRuleManager.getInstance().getRule(ssql);
         if (shardingTableRule == null) {

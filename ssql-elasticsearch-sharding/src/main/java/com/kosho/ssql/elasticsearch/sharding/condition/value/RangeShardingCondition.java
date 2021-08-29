@@ -20,4 +20,9 @@ public class RangeShardingCondition extends AbstractShardingCondition {
     public Range<Comparable<?>> getRange() {
         return range;
     }
+
+    @Override
+    public String toString() {
+        return shardingColumn + " " + range;
+    }
 }
