@@ -16,6 +16,13 @@ import java.util.stream.Collectors;
  * @since 2021-08-27
  */
 public class ShardingConditionFactory {
+    /**
+     * 根据Operation表达式构建分片条件
+     *
+     * @param expression     表达式
+     * @param shardingColumn 分片字段
+     * @return 分片条件
+     */
     public static Optional<ShardingCondition> create(OperationExpression expression, String shardingColumn) {
         switch (expression.getOperator()) {
             case EQ:

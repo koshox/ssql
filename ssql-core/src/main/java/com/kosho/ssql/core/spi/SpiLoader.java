@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class SpiLoader<S> {
     private static final String SPI_CFG_PREFIX = "META-INF/services/";
 
-    private static final Map<Class<?>, SpiLoader> SPI_LOADERS = new ConcurrentHashMap<>();
+    private static final Map<String, SpiLoader> SPI_LOADERS = new ConcurrentHashMap<>();
 
     private final List<Class<? extends S>> classList = Collections.synchronizedList(new ArrayList<>());
 
@@ -48,14 +48,14 @@ public class SpiLoader<S> {
      * 创建SPI加载器
      *
      * @param service SPI接口
-     * @param <T> SPI泛型
+     * @param <T>     SPI泛型
      * @return SPI加载器
      */
     public static <T> SpiLoader<T> of(Class<T> service) {
         Validate.notNull(service, "Spi class cannot be null");
         Validate.isTrue(service.isInterface(), "Spi class[" + service.getName() + "] must be interface");
 
-        return SPI_LOADERS.computeIfAbsent(service, key -> new SpiLoader(service));
+        return SPI_LOADERS.computeIfAbsent(service.getName(), key -> new SpiLoader(service));
     }
 
     /**
