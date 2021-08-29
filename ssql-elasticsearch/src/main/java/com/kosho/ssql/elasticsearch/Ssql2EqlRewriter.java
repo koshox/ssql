@@ -10,11 +10,11 @@ import java.util.List;
  * @since 2021-08-22
  */
 public interface Ssql2EqlRewriter {
-    default String rewriteFieldName(String fieldName) {
+    default String rewriteFieldName(Ssql2EqlContext context, String fieldName) {
         return fieldName;
     }
 
-    default List<String> rewriteTableName(String tableName) {
+    default List<String> rewriteTableName(Ssql2EqlContext context, String tableName) {
         return Collections.singletonList(tableName);
     }
 }

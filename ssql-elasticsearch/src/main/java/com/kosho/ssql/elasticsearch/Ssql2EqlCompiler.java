@@ -48,8 +48,7 @@ public class Ssql2EqlCompiler {
             new SsqlVarReplacer(params.getParams()).replaceVar(ssql);
         }
 
-        Ssql2EqlContext context = new Ssql2EqlContext();
-        context.setSsql2EqlParams(params);
+        Ssql2EqlContext context = new Ssql2EqlContext(ssql, params);
         buildWalkerChain(context).forEach(walker -> walker.walk(ssql));
         return context.getSsql2EqlResult();
     }

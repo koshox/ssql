@@ -53,7 +53,7 @@ public abstract class AbstractSsql2EqlAstWalker implements Ssql2EqlAstWalker {
 
         Ssql2EqlRewriter rewriter = context.getSsql2EqlParams().getRewriter();
         if (rewriter != null) {
-            return rewriter.rewriteFieldName(fieldName);
+            return rewriter.rewriteFieldName(context, fieldName);
         }
 
         return fieldName;

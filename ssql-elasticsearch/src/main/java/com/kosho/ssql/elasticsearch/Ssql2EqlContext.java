@@ -1,5 +1,6 @@
 package com.kosho.ssql.elasticsearch;
 
+import com.kosho.ssql.core.dsl.semantic.Ssql;
 import com.kosho.ssql.core.dsl.semantic.value.Value;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -19,11 +20,18 @@ public class Ssql2EqlContext {
 
     private final Map<String, Pair<String, Value>> selectValues = new HashMap<>();
 
-    private Ssql2EqlParams ssql2EqlParams;
+    private final Ssql2EqlParams ssql2EqlParams;
+
+    private final Ssql ssql;
 
     private String tableName;
 
     private String tableAlias;
+
+    public Ssql2EqlContext(Ssql ssql, Ssql2EqlParams ssql2EqlParams) {
+        this.ssql2EqlParams = ssql2EqlParams;
+        this.ssql = ssql;
+    }
 
     public Ssql2EqlResult getSsql2EqlResult() {
         return ssql2EqlResult;
@@ -39,10 +47,6 @@ public class Ssql2EqlContext {
 
     public Ssql2EqlParams getSsql2EqlParams() {
         return ssql2EqlParams;
-    }
-
-    public void setSsql2EqlParams(Ssql2EqlParams ssql2EqlParams) {
-        this.ssql2EqlParams = ssql2EqlParams;
     }
 
     public String getTableName() {
@@ -63,5 +67,9 @@ public class Ssql2EqlContext {
 
     public Ssql2EqlRewriter getRewriter() {
         return ssql2EqlParams.getRewriter();
+    }
+
+    public Ssql getSsql() {
+        return ssql;
     }
 }

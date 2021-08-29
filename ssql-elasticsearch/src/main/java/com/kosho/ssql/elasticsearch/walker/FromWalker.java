@@ -42,7 +42,7 @@ public class FromWalker extends AbstractSsql2EqlAstWalker {
             return;
         }
 
-        List<String> indices = rewriter.rewriteTableName(table.getName());
+        List<String> indices = rewriter.rewriteTableName(context, table.getName());
         eqlResult.getIndices().addAll(indices);
     }
 }
