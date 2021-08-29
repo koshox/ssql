@@ -18,7 +18,7 @@ params.put("name", "kosho");
 params.put("age", 25);
 Ssql ssql = Ssql.compile("select * from t_user where name = $name and age = $age");
 
-// 加载优先级最高的Hasher
+// 加载优先级最高的Hasher SPI实现
 Hasher hasher = SpiLoader.of(Hasher.class).loadHighestPriority();
 ```
 
