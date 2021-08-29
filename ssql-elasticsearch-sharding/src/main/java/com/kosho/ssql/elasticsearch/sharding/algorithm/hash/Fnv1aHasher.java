@@ -1,5 +1,7 @@
 package com.kosho.ssql.elasticsearch.sharding.algorithm.hash;
 
+import com.kosho.ssql.core.spi.Spi;
+
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -8,6 +10,7 @@ import java.nio.charset.StandardCharsets;
  * @author Kosho
  * @since 2021-08-29
  */
+@Spi("Fnv1a")
 public class Fnv1aHasher implements Hasher {
     private static final int FNV1_32_INIT = 0x811c9dc5;
 

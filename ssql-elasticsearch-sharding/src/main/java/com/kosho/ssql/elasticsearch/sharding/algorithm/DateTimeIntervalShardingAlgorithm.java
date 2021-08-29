@@ -5,6 +5,7 @@ import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTableRule;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Properties;
@@ -32,7 +33,7 @@ public class DateTimeIntervalShardingAlgorithm extends AbstractIntervalShardingA
 
         String numDateStr;
         try {
-            LocalDate inputDate = LocalDate.parse(shardingValue.toString(), inputFormatter);
+            LocalDateTime inputDate = LocalDateTime.parse(shardingValue.toString(), inputFormatter);
             numDateStr = DEFAULT_NUMBER_DATE_FMT.format(inputDate);
         } catch (RuntimeException e) {
             return null;

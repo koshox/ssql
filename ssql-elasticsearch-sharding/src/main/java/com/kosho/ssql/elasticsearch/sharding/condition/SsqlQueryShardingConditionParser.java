@@ -113,8 +113,9 @@ class SsqlQueryShardingConditionParser implements ShardingConditionParser<Ssql> 
             return leftValues;
         }
 
-        leftValues.retainAll(rightValues);
-        return leftValues;
+        List<Comparable<?>> result = new ArrayList<>(leftValues);
+        result.retainAll(rightValues);
+        return result;
     }
 
     private Range<Comparable<?>> mergeRangeShardingValues(Range<Comparable<?>> leftRange, Range<Comparable<?>> rightRange) {

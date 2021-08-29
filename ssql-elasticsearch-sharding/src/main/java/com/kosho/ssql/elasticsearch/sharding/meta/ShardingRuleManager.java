@@ -37,4 +37,8 @@ public class ShardingRuleManager {
         String logicalTableName = ssql.getFrom().getTables().get(0).getName();
         return shardingTableRules.get(logicalTableName);
     }
+
+    public void clean() {
+        shardingTableRules.clear();
+    }
 }
