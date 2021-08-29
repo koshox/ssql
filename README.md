@@ -1,7 +1,7 @@
 # Simple SQL Framework (通用SQL框架)
 
 SSQL是类SQL语法的一个数据查询、操作框架，主要目标是屏蔽不同数据源的差异，能够使用同一套SQL语法操作不同的数据源，
-比如MySQL，Elasticsearch，ClickHouse，以及更近一步的分库分表等等。
+比如MySQL，Elasticsearch，ClickHouse，以及更近一步的分库分表等等。后续会增加更多功能和数据源实现。
 
 ## ssql-core
 核心模块，主要包括：
@@ -61,6 +61,8 @@ ES查询DSL:
 }
 ```
 
+支持通过SPI或者参数的方式自定义Rewriter，可以改写编译结果的字段名，索引等。 
+
 ## ssql-elasticsearch-sharding
 SQL ElasticSearch分片模块，在ssql-elasticsearch基础上，支持elasticsearch的分索引，类似于ShardingSphere RDB的分库分表
 ```java
@@ -100,4 +102,9 @@ void useNumberIntervalRule() {
 ES索引: ["t_user_1", "t_user_2", "t_user_4"]
 ```
 
-## 后续扩展更多新模块...
+支持通过SPI的方式自定义ShardingAlgorithm(分片算法) <br>
+当前已支持：
+1. NumberInterval   数字间隔分片
+2. DateTimeInterval 时间日期间隔分片
+3. HashMod          Hash取模分片
+4. Mod              数字取模分片
