@@ -1,5 +1,6 @@
 package com.kosho.ssql.elasticsearch.sharding;
 
+import com.kosho.ssql.core.spi.Spi;
 import com.kosho.ssql.elasticsearch.Ssql2EqlContext;
 import com.kosho.ssql.elasticsearch.Ssql2EqlRewriter;
 import com.kosho.ssql.elasticsearch.sharding.meta.ShardingRuleManager;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
  * @author Kosho
  * @since 2021-08-27
  */
+@Spi(value = "ShardingRewriter", order = 1000)
 public class Ssql2EqlShardingRewriter implements Ssql2EqlRewriter {
     @Override
     public List<String> rewriteTableName(Ssql2EqlContext context, String tableName) {

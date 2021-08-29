@@ -3,6 +3,7 @@ package com.kosho.ssql.elasticsearch.sharding.algorithm;
 import com.google.common.collect.BoundType;
 import com.google.common.collect.Range;
 import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTable;
+import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTableRule;
 import com.kosho.ssql.elasticsearch.sharding.utils.RangeUtils;
 
 import java.util.ArrayList;
@@ -17,13 +18,13 @@ import java.util.Optional;
  */
 public abstract class AbstractIntervalShardingAlgorithm implements ShardingAlgorithm {
     @Override
-    public Optional<ShardingTable> doPreciseSharding(List<ShardingTable> shardingTables, Comparable<?> shardingValue) {
-        Long shardingValueNum = determineShardingValueNum(shardingValue);
+    public Optional<ShardingTable> doPreciseSharding(ShardingTableRule shardingTableRule, Comparable<?> shardingValue) {
+        Long shardingValueNum = determineShardingValueNum(shardingTableRule, shardingValue);
         if (shardingValueNum == null) {
             return Optional.empty();
         }
 
-        for (ShardingTable shardingTable : shardingTables) {
+        for (ShardingTable shardingTable : shardingTableRule.getShardingTables()) {
             Long lowerShardingValue = shardingTable.getLowerShardingValue();
             Long upperShardingValue = shardingTable.getUpperShardingValue();
             if (shardingValueNum >= lowerShardingValue && shardingValueNum < upperShardingValue) {
@@ -35,10 +36,10 @@ public abstract class AbstractIntervalShardingAlgorithm implements ShardingAlgor
     }
 
     @Override
-    public List<ShardingTable> doRangeSharding(List<ShardingTable> shardingTables, Range<Comparable<?>> shardingRange) {
+    public List<ShardingTable> doRangeSharding(ShardingTableRule shardingTableRule, Range<Comparable<?>> shardingRange) {
         List<ShardingTable> results = new ArrayList<>();
-        Range<Long> shardingValueRange = determineShardingValueRange(shardingRange);
-        for (ShardingTable shardingTable : shardingTables) {
+        Range<Long> shardingValueRange = determineShardingValueRange(shardingTableRule, shardingRange);
+        for (ShardingTable shardingTable : shardingTableRule.getShardingTables()) {
             Range<Long> shardingTableRange = shardingTable.buildShardingRange();
             if (RangeUtils.isCloseConnected(shardingValueRange, shardingTableRange)) {
                 results.add(shardingTable);
@@ -48,13 +49,25 @@ public abstract class AbstractIntervalShardingAlgorithm implements ShardingAlgor
         return results;
     }
 
-    protected abstract Long determineShardingValueNum(Comparable<?> shardingValue);
+    /**
+     * 分片值转换为Number, 方便后续比较
+     *
+     * @param shardingValue 分片值
+     * @return 分片Num值
+     */
+    protected abstract Long determineShardingValueNum(ShardingTableRule shardingTableRule, Comparable<?> shardingValue);
 
-    protected Range<Long> determineShardingValueRange(Range<Comparable<?>> shardingRange) {
+    /**
+     * 分片区间转换为Number区间, 方便后续比较
+     *
+     * @param shardingRange 分片区间
+     * @return 分片Num区间
+     */
+    protected Range<Long> determineShardingValueRange(ShardingTableRule shardingTableRule, Range<Comparable<?>> shardingRange) {
         if (shardingRange.hasLowerBound()) {
             Comparable<?> lowerEndpoint = shardingRange.lowerEndpoint();
             BoundType lowerBoundType = shardingRange.lowerBoundType();
-            Long lowerShardingNum = determineShardingValueNum(lowerEndpoint.toString());
+            Long lowerShardingNum = determineShardingValueNum(shardingTableRule, lowerEndpoint.toString());
 
             if (lowerShardingNum == null) {
                 return invalidRange();
@@ -63,7 +76,7 @@ public abstract class AbstractIntervalShardingAlgorithm implements ShardingAlgor
             if (shardingRange.hasUpperBound()) {
                 Comparable<?> upperEndpoint = shardingRange.upperEndpoint();
                 BoundType upperBoundType = shardingRange.upperBoundType();
-                Long upperShardingNum = determineShardingValueNum(upperEndpoint.toString());
+                Long upperShardingNum = determineShardingValueNum(shardingTableRule, upperEndpoint.toString());
 
                 if (upperShardingNum == null) {
                     return invalidRange();
@@ -77,7 +90,7 @@ public abstract class AbstractIntervalShardingAlgorithm implements ShardingAlgor
             if (shardingRange.hasUpperBound()) {
                 Comparable<?> upperEndpoint = shardingRange.upperEndpoint();
                 BoundType upperBoundType = shardingRange.upperBoundType();
-                Long upperShardingNum = determineShardingValueNum(upperEndpoint.toString());
+                Long upperShardingNum = determineShardingValueNum(shardingTableRule, upperEndpoint.toString());
 
                 if (upperShardingNum == null) {
                     return invalidRange();

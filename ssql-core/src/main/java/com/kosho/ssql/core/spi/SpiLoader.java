@@ -64,7 +64,7 @@ public class SpiLoader<S> {
      * @param name SPI名称
      * @return SPI impl
      */
-    public S loadInstance(String name) {
+    public S load(String name) {
         Validate.notEmpty(name, "SPI name cannot be empty");
 
         load();
@@ -82,7 +82,7 @@ public class SpiLoader<S> {
      *
      * @return default SPI impl
      */
-    public S loadDefaultInstance() {
+    public S loadDefault() {
         load();
 
         if (defaultClass == null) {
@@ -97,7 +97,7 @@ public class SpiLoader<S> {
      *
      * @return SPI impl
      */
-    public S loadInstanceByPriority() {
+    public S loadHighestPriority() {
         load();
 
         if (classList.isEmpty()) {
@@ -112,7 +112,7 @@ public class SpiLoader<S> {
      *
      * @return SPI impl list
      */
-    public List<S> loadAllInstances() {
+    public List<S> loadAll() {
         load();
 
         return createInstances(classList);

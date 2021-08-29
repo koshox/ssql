@@ -2,6 +2,7 @@ package com.kosho.ssql.elasticsearch.sharding.algorithm;
 
 import com.google.common.collect.Range;
 import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTable;
+import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTableRule;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,21 @@ import java.util.Optional;
  * @since 2021-08-27
  */
 public interface ShardingAlgorithm {
-    Optional<ShardingTable> doPreciseSharding(List<ShardingTable> shardingTables, Comparable<?> shardingValue);
+    /**
+     * 精确分片
+     *
+     * @param shardingTableRule 分片规则
+     * @param shardingValue  分片值
+     * @return 分片计算结果
+     */
+    Optional<ShardingTable> doPreciseSharding(ShardingTableRule shardingTableRule, Comparable<?> shardingValue);
 
-    List<ShardingTable> doRangeSharding(List<ShardingTable> shardingTables, Range<Comparable<?>> shardingRange);
+    /**
+     * 区间分片
+     *
+     * @param shardingTableRule 分片规则
+     * @param shardingRange  分片区间
+     * @return 分片计算结果
+     */
+    List<ShardingTable> doRangeSharding(ShardingTableRule shardingTableRule, Range<Comparable<?>> shardingRange);
 }

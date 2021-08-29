@@ -1,1 +1,4 @@
 com.kosho.ssql.elasticsearch.sharding.algorithm.NumberIntervalShardingAlgorithm
+com.kosho.ssql.elasticsearch.sharding.algorithm.DateTimeIntervalShardingAlgorithm
+com.kosho.ssql.elasticsearch.sharding.algorithm.HashModShardingAlgorithm
+com.kosho.ssql.elasticsearch.sharding.algorithm.ModShardingAlgorithm

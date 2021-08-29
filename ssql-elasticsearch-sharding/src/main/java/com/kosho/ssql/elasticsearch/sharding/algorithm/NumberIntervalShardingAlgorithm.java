@@ -1,6 +1,7 @@
 package com.kosho.ssql.elasticsearch.sharding.algorithm;
 
 import com.kosho.ssql.core.spi.Spi;
+import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTableRule;
 
 /**
  * 数字区间分片算法
@@ -11,7 +12,7 @@ import com.kosho.ssql.core.spi.Spi;
 @Spi("NumberInterval")
 public class NumberIntervalShardingAlgorithm extends AbstractIntervalShardingAlgorithm {
     @Override
-    protected Long determineShardingValueNum(Comparable<?> shardingValue) {
+    protected Long determineShardingValueNum(ShardingTableRule shardingTableRule, Comparable<?> shardingValue) {
         try {
             return Long.parseLong(shardingValue.toString());
         } catch (NumberFormatException e) {

@@ -2,6 +2,7 @@ package com.kosho.ssql.elasticsearch;
 
 import com.kosho.ssql.core.dsl.semantic.Ssql;
 import com.kosho.ssql.core.dsl.semantic.value.Value;
+import com.kosho.ssql.core.spi.SpiLoader;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -22,6 +23,8 @@ public class Ssql2EqlContext {
 
     private final Ssql2EqlParams ssql2EqlParams;
 
+    private final Ssql2EqlRewriter rewriter;
+
     private final Ssql ssql;
 
     private String tableName;
@@ -31,6 +34,9 @@ public class Ssql2EqlContext {
     public Ssql2EqlContext(Ssql ssql, Ssql2EqlParams ssql2EqlParams) {
         this.ssql2EqlParams = ssql2EqlParams;
         this.ssql = ssql;
+        this.rewriter = (ssql2EqlParams.getRewriter() != null)
+                ? ssql2EqlParams.getRewriter()
+                : SpiLoader.of(Ssql2EqlRewriter.class).loadHighestPriority();
     }
 
     public Ssql2EqlResult getSsql2EqlResult() {
@@ -66,7 +72,7 @@ public class Ssql2EqlContext {
     }
 
     public Ssql2EqlRewriter getRewriter() {
-        return ssql2EqlParams.getRewriter();
+        return rewriter;
     }
 
     public Ssql getSsql() {

@@ -6,6 +6,7 @@ import com.kosho.ssql.elasticsearch.sharding.condition.ShardingConditionParser;
 import com.kosho.ssql.elasticsearch.sharding.condition.ShardingConditionParserFactory;
 import com.kosho.ssql.elasticsearch.sharding.condition.value.ShardingConditions;
 import com.kosho.ssql.elasticsearch.sharding.meta.ShardingRuleManager;
+import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTable;
 import com.kosho.ssql.elasticsearch.sharding.meta.ShardingTableRule;
 import com.kosho.ssql.elasticsearch.sharding.route.ShardingConditionRouter;
 import com.kosho.ssql.elasticsearch.sharding.route.ShardingConditionRouterFactory;
@@ -29,19 +30,16 @@ public class Ssql2EqlShardingRouter {
     }
 
     public ShardingRouteResult route(Ssql ssql) {
+        ShardingTableRule shardingTableRule = ShardingRuleManager.getInstance().getRule(ssql);
+        if (shardingTableRule == null) {
+            String tableName = ssql.getFrom().getTables().get(0).getName();
+            ShardingTable shardingTable = new ShardingTable();
+            shardingTable.setTableName(tableName);
+            return ShardingRouteResult.of(shardingTable);
+        }
+
         ShardingConditionParser<Ssql> conditionParser = ShardingConditionParserFactory.getSsqlConditionParser(ssql);
         ShardingConditions shardingConditions = conditionParser.parse(ssql);
-
-        // 分片条件为False，不再路由
-        if (shardingConditions.isAlwaysFalse()) {
-            return ShardingRouteResult.empty();
-        }
-
-        // 分片条件为空，返回所有分片
-        ShardingTableRule shardingTableRule = ShardingRuleManager.getInstance().getRule(ssql);
-        if (shardingConditions.isEmpty()) {
-            return ShardingRouteResult.of(shardingTableRule.getShardingTables());
-        }
 
         ShardingConditionRouter conditionRouter = ShardingConditionRouterFactory.getSsqlShardingConditionRouter(ssql);
         return conditionRouter.route(shardingConditions, shardingTableRule);

@@ -20,8 +20,12 @@ public class ShardingRouteResult {
         this.tables = tables;
     }
 
-    public static ShardingRouteResult of(List<ShardingTable> result) {
-        return new ShardingRouteResult(new HashSet<>(result));
+    public static ShardingRouteResult of(ShardingTable shardingTable) {
+        return new ShardingRouteResult(Collections.singleton(shardingTable));
+    }
+
+    public static ShardingRouteResult of(List<ShardingTable> shardingTables) {
+        return new ShardingRouteResult(new HashSet<>(shardingTables));
     }
 
     public static ShardingRouteResult empty() {

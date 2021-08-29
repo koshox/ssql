@@ -1,5 +1,7 @@
 package com.kosho.ssql.elasticsearch.sharding.meta;
 
+import java.util.Properties;
+
 /**
  * 分片策略
  *
@@ -11,7 +13,7 @@ public class ShardingStrategy {
 
     private String shardingAlgorithm;
 
-    private int numberOfShards;
+    private Properties properties;
 
     public String getShardingColumn() {
         return shardingColumn;
@@ -29,11 +31,11 @@ public class ShardingStrategy {
         this.shardingAlgorithm = shardingAlgorithm;
     }
 
-    public int getNumberOfShards() {
-        return numberOfShards;
+    public Properties getProperties() {
+        return properties;
     }
 
-    public void setNumberOfShards(int numberOfShards) {
-        this.numberOfShards = numberOfShards;
+    public void setProperties(Properties properties) {
+        this.properties = properties;
     }
 }

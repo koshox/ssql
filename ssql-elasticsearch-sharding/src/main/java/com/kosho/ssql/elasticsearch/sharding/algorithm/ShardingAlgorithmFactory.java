@@ -19,7 +19,7 @@ public class ShardingAlgorithmFactory {
     private static final Map<String, ShardingAlgorithm> ALGORITHM_MAP = new HashMap<>();
 
     static {
-        List<ShardingAlgorithm> algorithms = SpiLoader.of(ShardingAlgorithm.class).loadAllInstances();
+        List<ShardingAlgorithm> algorithms = SpiLoader.of(ShardingAlgorithm.class).loadAll();
         for (ShardingAlgorithm algorithm : algorithms) {
             Spi spi = algorithm.getClass().getAnnotation(Spi.class);
             if (spi == null || StringUtils.isEmpty(spi.value())) {
