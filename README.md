@@ -3,6 +3,8 @@
 SSQL是类SQL语法的一个数据查询、操作框架，主要目标是屏蔽不同数据源的差异，能够使用同一套SQL语法操作不同的数据源，
 比如MySQL，Elasticsearch，ClickHouse，以及更近一步的分库分表等等。后续会增加更多功能和数据源实现。
 
+![SSQL AST](http://media.kosho.tech/blog/ssql/ssql-ast.png)
+
 ## ssql-core
 核心模块，主要包括：
 1. SQL解析，将SQL解析为AST
